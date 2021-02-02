@@ -53,7 +53,7 @@
     methods: {
       loadDialog() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/chat/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/chat/",
           type: "GET",
           data: {
             room: this.id
@@ -65,7 +65,7 @@
       },
       sendMessage() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/chat/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/chat/",
           type: "POST",
           data: {
             room: this.id,

@@ -35,7 +35,7 @@
     methods: {
       loadUsers() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/users/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/users/",
           type: "GET",
           success: (response) => {
             this.list = response.data
@@ -44,7 +44,7 @@
       },
       addUser() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/users/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/users/",
           type: "POST",
           data: {
             room: this.room,

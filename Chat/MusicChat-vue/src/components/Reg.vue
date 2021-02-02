@@ -5,10 +5,10 @@
         <mu-text-field v-model="validateForm.username" prop="username"></mu-text-field>
       </mu-form-item>
       <mu-form-item label="Пароль" prop="password" :rules="passwordRules">
-        <mu-text-field type="password" v-model="validateForm.password" prop="password"></mu-text-field>
+        <mu-text-field type="text" v-model="validateForm.password" prop="password"></mu-text-field>
       </mu-form-item>
-      <mu-form-item label="Подтвердите пароль" help-text="Убедитесь, что пароли совпадают" prop="password" :rules="passwordRules">
-        <mu-text-field type="password" v-model="validateForm.confPassword" prop="password"></mu-text-field>
+      <mu-form-item label="Email" prop="Email">
+        <mu-text-field type="text" v-model="validateForm.Email" prop="Email"></mu-text-field>
       </mu-form-item>
       <mu-form-item>
         <mu-button color="primary" @click="setReg">Зарегистрироваться</mu-button>
@@ -37,7 +37,7 @@
         validateForm: {
           username: '',
           password: '',
-          confPassword: '',
+          Email: '',
         }
       }
     },
@@ -50,20 +50,17 @@
         this.validateForm = {
           username: '',
           password: '',
-          confPassword: '',
+          Email: '',
         };
       },
       setReg() {
-        this.$refs.form.validate().then((result) => {
-          console.log('form valid: ', result)
-        });
         $.ajax({
-          url: 'http://127.0.0.1:8000/auth/users/',
+          url: 'https://musicchat-django.herokuapp.com/auth/users/',
           type: "POST",
           data: {
             username: this.validateForm.username,
             password: this.validateForm.password,
-            confPassword: this.validateForm.confPassword
+            Email: this.validateForm.Email,
           },
           success: (response) => {
             alert("Спасибо за регистрацию")

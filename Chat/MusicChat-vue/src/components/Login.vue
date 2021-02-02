@@ -53,7 +53,7 @@
       },
       setLogin() {
         $.ajax({
-          url: 'http://127.0.0.1:8000/auth/token/login/',
+          url: 'https://musicchat-django.herokuapp.com/auth/token/login/',
           type: "POST",
           data: {
             username: this.validateForm.username,

@@ -32,7 +32,7 @@
     methods: {
       loadRoom() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/room/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/room",
           type: "GET",
           success: (response) => {
             this.rooms = response.data.data
@@ -44,7 +44,7 @@
       },
       AddRoom() {
         $.ajax({
-          url: "http://127.0.0.1:8000/api/v1/chat/room/",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/room/",
           type: "POST",
           success: (response) => {
             this.loadRoom()
