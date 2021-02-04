@@ -53,10 +53,10 @@ INSTALLED_APPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ddc6agjp778bf5',
-        'USER': 'vyrqrukkfkgapj',
-        'PASSWORD': 'e5e240e7eb51916675f51710655c289f7f93c97a1ae654616ae9990d7d634ebb',
-        'HOST': 'ec2-52-70-135-246.compute-1.amazonaws.com',
+        'NAME': 'd6ucp4n5462tg',
+        'USER': 'swwlqbjjycsohv',
+        'PASSWORD': '5bc396069e45dacfba9585f861617c12cc7beb837d191f6ae07cff47beb60750',
+        'HOST': 'ec2-34-224-254-126.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -193,3 +193,5 @@ CORS_ALLOW_HEADERS = (
         'authorization',
         'x-csrftoken'
 )
+
+AUTH_USER_MODEL = "chat_room.User" 

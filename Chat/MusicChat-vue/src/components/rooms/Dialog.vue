@@ -4,20 +4,19 @@
       <mu-row v-for="dialog in dialogs"
               direction="column"
               justify-content="start"
-              align-items="end">
-        <p><strong>{{dialog.user.username}}</strong></p>
+              align-items="end"
+              v-autoscroll:noscroll="'bottom'">
+        <p><strong>{{dialog.user.username}} ({{dialog.user.first_name}} {{dialog.user.last_name}})</strong></p>
         <p>{{dialog.text}}</p>
-        <span>{{dialog.date}}</span>
       </mu-row>
     </mu-container>
-    <mu-container class="message">
+    <mu-container class="message"id="app">
       <mu-row>
         <mu-text-field v-model="textarea"
                        placeholder="сообщение"
                        full-width>
         </mu-text-field>
         <mu-button round color="primary" @click="sendMessage">Отправить</mu-button>
-        <AddUsers class="adduser" :room="id"></AddUsers>
       </mu-row>
     </mu-container>
   </mu-col>
@@ -25,15 +24,15 @@
 
 <script>
   import $ from 'jQuery'
-  import AddUsers from './AddUsers'
+  import { autoscroll } from 'vue-autoscroll'
 
   export default {
+    directives: {
+      autoscroll
+    },
     name: 'Dialog',
     props: {
       id: '',
-    },
-    components: {
-      AddUsers
     },
     data() {
       return {
@@ -72,12 +71,20 @@
             text: this.textarea
           },
           success: (response) => {
+
            this.loadDialog()
           },
           error: (response) => {
-            alert(response.statusText)
+            alert("Вы не можете отправить пустое сообщение")
           }
-        })
+        }),
+        this.textarea = ''
+      },
+      scrollToElement() {
+        const el = this.$el.getElementsByClassName('scroll-to-me')[0];
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   }
@@ -85,14 +92,25 @@
 
 <style scoped>
   .dialog {
-    position: relative;
-    border: 1px solid #000
+    position: absolute;
+    overflow: auto;
+    max-height: 746px;
+    min-height: 0px;
+    width: 100%;
+    top: 10%;
+    background-color: white;
+    border-radius: 10px;
   }
   .adduser{
     margin: 0 15px;
   }
   .message {
-    position: relative;
+    background-color: white;
+    position: fixed;
+    bottom: -12%;
+    width: 39%;
+    height: 15%;
     margin: 5% 0%;
+    border-radius: 10px;
   }
 </style>

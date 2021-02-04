@@ -1,5 +1,8 @@
 <template>
   <mu-container>
+    <mu-row>
+      Пожалуйста, введите данные указанные при регистрации чтобы войти
+    </mu-row>
     <mu-form ref="form" :model="validateForm" class="mu-form">
       <mu-form-item label="Имя пользователя (логин)" prop="username" :rules="usernameRules">
         <mu-text-field v-model="validateForm.username" prop="username"></mu-text-field>

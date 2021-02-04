@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import MuseUI from 'muse-ui';
-import 'muse-ui/dist/muse-ui.css';
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+import Autoscroll from 'vue-autoscroll'
+
 
 Vue.use(MuseUI);
-
+Vue.use(Autoscroll)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

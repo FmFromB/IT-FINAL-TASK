@@ -1,10 +1,6 @@
 <template>
   <mu-col span="4" sm="3" class="rooms_list">
-    <mu-button @click="AddRoom">Создать комнату</mu-button>
-    <div  v-for="room in rooms">
-    <h3 @click="openDialog(room.id)">{{room.creator.username}}</h3>
-    <small>{{room.date}}</small>
-    </div>
+    <h3>Это общий фид ---></h3>
   </mu-col>
 </template>
 
@@ -23,6 +19,9 @@
 
       }
     },
+    mounted() {
+      this.openDialog(1)
+    },
     created() {
       $.ajaxSetup({
         headers: { 'Authorization': "Token " + sessionStorage.getItem('auth_token') },
@@ -32,7 +31,7 @@
     methods: {
       loadRoom() {
         $.ajax({
-          url: "https://musicchat-django.herokuapp.com/api/v1/chat/room",
+          url: "https://musicchat-django.herokuapp.com/api/v1/chat/room/",
           type: "GET",
           success: (response) => {
             this.rooms = response.data.data

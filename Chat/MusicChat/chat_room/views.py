@@ -3,9 +3,14 @@ from django.db.models import Q
 from rest_framework.response import Response 
 from rest_framework import permissions
 from rest_framework.views import APIView
-from django.contrib.auth.models import User
+from django.views.generic import *
 from .serializers import (RoomSerializers, ChatSerializer, ChatPostSerializer, UserSerializer)
 from .models import *
+
+class HomeListView(ListView):
+    model = User
+    template_name = 'home.html'
+    context_object_name = 'home'
 
 class RoomView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -23,16 +28,20 @@ class ChatView(APIView):
     def get(self, request):
         room = request.GET.get("room")
         chat = Chat.objects.filter(room=room)
+        chat = Chat.objects.order_by('-id')
         serializer = ChatSerializer(chat, many=True)
         return Response({"data": serializer.data})
 
     def post(self, request):
-        chat = ChatPostSerializer(data=request.data)
-        if chat.is_valid():
-            chat.save(user=request.user)
-            return Response(status=201)
-        else:
-            return Response(status=400)
+        if request.method == 'POST':
+            chat = ChatPostSerializer(data=request.data)
+            if chat.is_valid():
+                chat.save(user=request.user)
+                return Response(chat.data, status=201)
+            else:
+                return Response(chat.errors, status=400)
+        return Response(data)
+
 
 class AddUserView(APIView):
     def get(self, request):
